@@ -1,0 +1,15 @@
+[Unit]
+Description=etcd
+Documentation=https://github.com/coreos/etcd
+
+[Service]
+Type=notify
+Restart=always
+RestartSec=5s
+LimitNOFILE=40000
+TimeoutStartSec=0
+
+ExecStart=/usr/bin/etcd --name ip-172-35-1-248 --data-dir /var/lib/etcd --listen-client-urls http://0.0.0.0:2379 --advertise-client-urls http://172.35.1.248:2379 --listen-peer-urls http://172.35.1.248:2380 --initial-advertise-peer-urls http://172.35.1.248:2380 --initial-cluster ip-172.35-1-248=http://172.35.1.248:2380,ip-172.35-1-239=http://172.35.1.239:2380 --initial-cluster-token webui-etcd-token --initial-cluster-state new
+
+[Install]
+WantedBy=multi-user.target
